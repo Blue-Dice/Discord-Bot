@@ -24,10 +24,10 @@ pets = ["pet_la","pet_lb","pet_lc","pet_ld","pet_le","pet_lf","pet_lg","pet_lh",
 async def Hunt(message):
   while(1):
     await message.channel.send("rpg hunt")
-    def check(message):
-      return message.author.id == 555955826880413696 and any(word in message.content for word in hunt)
+    def check(msg):
+      return msg.author.id == 555955826880413696 and any(word in msg.content for word in hunt)
     try:
-      await client.wait_for("message",timeout=10,check=check)
+      msg = await client.wait_for("message",timeout=10,check=check)
     except asyncio.TimeoutError:
       await message.channel.send('rpg hunt')
     def stop(message):
