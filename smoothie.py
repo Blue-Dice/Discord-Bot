@@ -25,7 +25,7 @@ async def Hunt(message):
   while(1):
     await message.channel.send("rpg hunt")
     def check(message):
-      return message.author.id == 555955826880413696 and (any(word in message.content for word in hunt)
+      return message.author.id == 555955826880413696 and any(word in message.content for word in hunt)
     try:
       await client.wait_for("message",timeout=10,check=check)
     except asyncio.TimeoutError:
