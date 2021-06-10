@@ -11,6 +11,8 @@ async def on_ready():
   await client.get_channel(828941473096794142).send("Manual Restart")
   print("You have successfully been tricked by Blueberry")
 
+hunt = ['found and killed']
+name = ['Blueberry Smoothie','475364248197791764']
 FHunt = 0
 FWork = 0
 FEdgy = 0
@@ -22,6 +24,12 @@ pets = ["pet_la","pet_lb","pet_lc","pet_ld","pet_le","pet_lf","pet_lg","pet_lh",
 async def Hunt(message):
   while(1):
     await message.channel.send("rpg hunt")
+    def check(message):
+      return message.author.id == 555955826880413696 and any(word in message.content for word in name) and (any(word in message.content for word in hunt) or any(word in message.content for word in jail))
+    try:
+      await client.wait_for("message",timeout=10,check=check)
+    except asyncio.TimeoutError:
+      await message.channel.send('rpg hunt')
     def stop(message):
       return message.author == client.user and message.content == "#stop hunt"
     try:
