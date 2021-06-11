@@ -33,9 +33,7 @@ async def Hunt(message):
         while(1):
             await message.channel.send('rpg hunt')
             def check1(message):
-                return message.author.id == lume and 
-                any(word in message.content for word in name) and 
-                any(word in message.content.lower() for word in hunt)
+                return message.author.id == lume and any(word in message.content for word in name) and any(word in message.content.lower() for word in hunt)
             try:
                 msg = await client.wait_for('message',timeout=10,check=check1)
                 break
@@ -50,9 +48,7 @@ async def Hunt(message):
                 while(1):
                     await message.channel.send('rpg heal')
                     def check2(message):
-                        return message.author.id == lume and
-                        any(word in message.content for word in name) and
-                        any(word in message.content for word in heal)
+                        return message.author.id == lume and any(word in message.content for word in name) and any(word in message.content for word in heal)
                     try:
                         await client.wait_for('message',timeout=10,check=check2)
                         break
@@ -60,8 +56,7 @@ async def Hunt(message):
                         continue
         
         def check3(message):
-            return message.author == client.user and
-            message.content.lower() == '#halt'
+            return message.author == client.user and message.content.lower() == '#halt'
         try:
             await client.wait_for('message',timeout=61,check=check3)
             await message.channel.send('Abrupt Halt - DeprecationWarning')
