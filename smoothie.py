@@ -3,7 +3,6 @@ import os
 import asyncio
 import sys
 
-from keep_alive import keep_alive
 client = discord.Client()
 
 @client.event
@@ -323,5 +322,4 @@ async def on_message(message):
   else:
     return
 
-keep_alive()
 client.run(os.getenv('TOKEN'))
