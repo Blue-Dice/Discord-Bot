@@ -7,7 +7,7 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    global name[]
+    global name
     n1 = str(client.user.name)
     n2 = str(client.user.id)
     name = [n1,n2]
