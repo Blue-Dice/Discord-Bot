@@ -61,7 +61,8 @@ async def Hunt(message):
         try:
             await client.wait_for('message',timeout=61,check=check3)
             await message.channel.send('!hunt')
-            break   
+            break
+    return 0
 
 @client.event
 async def on_message(message):
