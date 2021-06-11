@@ -41,8 +41,8 @@ async def Hunt(message):
                 continue
                 
         if 'Lost' in msg.content:
-            HP = msg.content.split('Lost ',1)[1]
-            HP = int(HP.split(' HP',1)[0]
+            HP = msg.content.split("Lost ",1)[1]
+            HP = int(HP.split(" HP,",1)[0])
             if HP == 0:
                 pass
             else:
