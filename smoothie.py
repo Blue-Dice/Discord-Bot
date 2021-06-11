@@ -65,6 +65,44 @@ async def Hunt(message):
             continue
     return
 
+async def Advs(message):
+    while(1):
+        while(1):
+            await message.channel.send('rpg adv')
+            def check1(message):
+                return message.author.id == lume and any(word in message.content for word in name) and any(word in message.content.lower() for word in advs)
+            try:
+                msg = await client.wait_for('message',timeout=10,check=check1)
+                break
+            except asyncio.TimeoutError:
+                continue  
+                
+        if 'Lost' in msg.content:
+            HP = msg.content.split("Lost ",1)[1]
+            HP = int(HP.split(" HP,",1)[0])
+            if HP == 0:
+                pass
+            else:
+                while(1):
+                    await message.channel.send('rpg heal')
+                    def check2(message):
+                        return message.author.id == lume and any(word in message.content for word in name) and any(word in message.content for word in heal)
+                    try:
+                        await client.wait_for('message',timeout=10,check=check2)
+                        break
+                    except asyncio.TimeoutError:
+                        continue    
+                        
+        def check3(message):
+            return message.author == client.user and message.content.lower() == '#stop adv'
+        try:
+            await client.wait_for('message',timeout=3602,check=check3)
+            await message.channel.send('!Adv')
+            break
+        except asyncio.TimeoutError:
+            continue
+    return
+
 @client.event
 async def on_message(message):
     channel1 = client.get_channel(828941473096794142)
@@ -76,5 +114,7 @@ async def on_message(message):
             action = str(message.content.split('#start ',1)[1])
             if action.lower() == 'hunt':
                 await Hunt(message)
+            if action.lower() == 'adv':
+                await Advs(message)
 
 client.run(os.getenv('TOKEN'))
