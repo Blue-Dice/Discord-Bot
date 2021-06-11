@@ -75,6 +75,6 @@ async def on_message(message):
         if message.content.startswith('#start'):
             action = str(message.content.split('#start ',1)[1])
             if action.lower() == 'hunt':
-                Hunt(message)
+                await Hunt(message)
 
 client.run(os.getenv('TOKEN'))
