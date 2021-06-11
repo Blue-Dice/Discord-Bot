@@ -38,7 +38,8 @@ async def Hunt(message):
                 msg = await client.wait_for('message',timeout=10,check=check1)
                 break
             except asyncio.TimeoutError:
-                continue       
+                continue  
+                
         if 'Lost' in msg.content:
             HP = msg.content.split("Lost ",1)[1]
             HP = int(HP.split(" HP,",1)[0])
@@ -53,13 +54,16 @@ async def Hunt(message):
                         await client.wait_for('message',timeout=10,check=check2)
                         break
                     except asyncio.TimeoutError:
-                        continue               
+                        continue    
+                        
         def check3(message):
             return message.author == client.user and message.content.lower() == '#stop hunt'
         try:
             await client.wait_for('message',timeout=61,check=check3)
             await message.channel.send('!hunt')
             break
+        except asyncio.TimeoutError:
+            continue
     return
 
 @client.event
