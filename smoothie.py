@@ -7,14 +7,13 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    global n1
-    global n2
+    global name[]
     n1 = str(client.user.name)
     n2 = str(client.user.id)
+    name = [n1,n2]
     await client.get_channel(828941473096794142).send('Hax Mode: ON')
     print('You have successfully been tricked by Blueberry')
 
-name = [n1,n2]
 hunt = ['slime','goblin','wolf','skeleton','nymph','ghost','baby','zombie','witch','imp','ghoul','giant','scorpion','unicorn','sorcerer','cecaelia','giant','mermaid','nereid','demon','harpy','robot','dullahan','manticore','dragon']
 work = ['chopping','fishing','fish','log','nets','axe']
 jail = ['jail']
