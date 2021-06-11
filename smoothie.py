@@ -67,7 +67,7 @@ async def Hunt(message):
 
 @client.event
 async def on_message(message):
-    channel1 = await client.get_channel(828941473096794142)
+    channel1 = client.get_channel(828941473096794142)
     if message.channel != channel1:
         return
     
