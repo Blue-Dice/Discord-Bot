@@ -15,8 +15,8 @@ async def on_ready():
     print('You have successfully been tricked by Blueberry')
 
 hunt = ['slime','goblin','wolf','skeleton','nymph','ghost','baby','zombie','witch','imp','ghoul','giant','scorpion','unicorn','sorcerer','cecaelia','giant','mermaid','nereid','demon','harpy','robot','dullahan','manticore','dragon']
-work = ['chopping','fishing','fish','log','nets','axe']
-jail = ['jail']
+work = ['fishing','chopping','collecting','mining']
+worker = ['fish','net','boat','bigboat','chop','axe','bowsaw','chainsaw','pickup','ladder','tractor','greenhouse','mine','pickaxe','drill','dynamite']
 advs = ['mutant','giant','bees','ogre','dark','hyper','werewolf','centaur','chimera','golem','mammoth','key','ent','dinosaur','cyclops','helicopter','hydra','kraken','leviathan','tank','wyrm','titan','typhon','dragon']
 edgy = ['successfully bought','EDGY','420,600']
 heal = ['your life has been restored','your life is maxed out']
@@ -46,6 +46,7 @@ async def Hunt(message):
                 pass
             else:
                 while(1):
+                    await asyncio.sleep(2)
                     await message.channel.send('rpg heal')
                     def check2(message):
                         return message.author.id == lume and any(word in message.content for word in name) and any(word in message.content for word in heal)
@@ -84,6 +85,7 @@ async def Advs(message):
                 pass
             else:
                 while(1):
+                    await asyncio.sleep(2)
                     await message.channel.send('rpg heal')
                     def check2(message):
                         return message.author.id == lume and any(word in message.content for word in name) and any(word in message.content for word in heal)
@@ -97,12 +99,33 @@ async def Advs(message):
             return message.author == client.user and message.content.lower() == '#stop adv'
         try:
             await client.wait_for('message',timeout=3602,check=check3)
-            await message.channel.send('!Adv')
+            await message.channel.send('!adv')
             break
         except asyncio.TimeoutError:
             continue
     return
 
+async def Work(message,action):
+    while(1):
+        while(1):
+            await message.channel.send(f'rpg {action}')
+            def check1(message):
+                return message.author.id == lume and any(word in message.content for word in name) and any(word in message.content.lower() for word in work)
+            try:
+                await client.wait_for('message',timeout=10,check=check1)
+                break
+            except asyncio.TimeoutError:
+                continue
+                
+        def check2(message):
+            return message.author == client.user and message.content.lower() == '#stop work'
+        try:
+            await client.wait_for('message',timeout=302,check=check2)
+            await message.channel.send('!work')
+            break
+        except asyncio.TimeoutError:
+            continue
+    return
 @client.event
 async def on_message(message):
     channel1 = client.get_channel(828941473096794142)
@@ -116,5 +139,7 @@ async def on_message(message):
                 await Hunt(message)
             if action.lower() == 'adv':
                 await Advs(message)
+            if any(word in action.lower() for word in worker):
+                await Work(message,action)
 
 client.run(os.getenv('TOKEN'))
