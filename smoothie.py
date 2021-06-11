@@ -31,7 +31,7 @@ async def Hunt(message):
       if any(word in msg.content for word in name) and any(word in msg.content for word in jail):
         return
     except asyncio.TimeoutError:
-      await message.channel.send('rpg hunt')
+      await message.channel.send('error')
     def stop(message):
       return message.author == client.user and message.content == '#stop hunt'
     try:
