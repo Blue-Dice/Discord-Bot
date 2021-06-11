@@ -30,7 +30,7 @@ async def Hunt(message):
       msg = await client.wait_for('message', timeout=10, check=check)
       if any(word in msg.content for word in name) and any(word in msg.content for word in jail):
         return
-       await message.channel.send('finally')
+      await message.channel.send('finally')
     except asyncio.TimeoutError:
       await message.channel.send('error')
     def stop(message):
