@@ -55,7 +55,7 @@ async def Hunt(message):
                         break
                     except asyncio.TimeoutError:
                         continue
-        
+                        
         def check3(message):
             return message.author == client.user and message.content.lower() == '#stop hunt'
         try:
