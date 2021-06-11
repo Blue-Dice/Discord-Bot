@@ -57,13 +57,11 @@ async def Hunt(message):
                         continue
         
         def check3(message):
-            return message.author == client.user and message.content.lower() == '#halt'
+            return message.author == client.user and message.content.lower() == '#stop hunt'
         try:
             await client.wait_for('message',timeout=61,check=check3)
-            await message.channel.send('Abrupt Halt - DeprecationWarning')
-            break
-    if message.content.lower().startswith('#stop hunt'):
-        return
+            await message.channel.send('!hunt')
+            break  
     return      
 
 @client.event
