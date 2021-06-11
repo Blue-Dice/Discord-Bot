@@ -43,7 +43,8 @@ async def Hunt(message):
         if 'Lost' in msg.content:
             HP = msg.content.split('Lost ',1)[1]
             HP = int(HP.split(' HP',1)[0]
-            if HP == 0: break
+            if HP == 0:
+                pass
             else:
                 while(1):
                     await message.channel.send('rpg heal')
