@@ -12,7 +12,7 @@ async def on_ready():
     print('you have been successfully tricked by blueberry')
 
 @client.event
-async def on_message():
+async def on_message(message):
     minion = discord.utils.get(guild.roles, name = 'Mini-Berry')
     channel1 = client.get_channel()
     if minion in message.author.roles:
