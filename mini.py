@@ -33,5 +33,9 @@ async def on_message(message):
                     await message.channel.send(f'{embed.to_dict()}')
             except:
                 return
+        if message.content.startswith('#history'):
+            msg = await channel1.history(limit=2).flatten()
+            msg = msg[1]
+            await message.channel.send(f'{msg.content}')
 
 client.run(os.getenv('TOKEN'))
