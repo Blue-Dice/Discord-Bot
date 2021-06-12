@@ -32,7 +32,9 @@ async def on_message(message):
             embeds = msg.embeds
             for embed in embeds:
                 embed_dict = embed.to_dict()
-            if embed_dict['description'] == ['Guild successfully upgraded!']:
+            if embed_dict['description'] == 'Guild successfully upgraded!':
                 await message.channel.send('Successful Upgrade')
+            else:
+                await message.channel.send('Error')
 
 client.run(os.getenv('TOKEN'))
