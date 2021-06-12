@@ -45,13 +45,13 @@ async def on_message(message):
             else:
                 continue
     i = 0
-    for i in range(aid.len()):
+    for i in range(len(aid)):
         await message.channel.send(aid[i])
     
     i = 0
-    for i in range(aid.len()):
+    for i in range(len(aid)):
         j = 0
-        for j in range(aid.len()):
+        for j in range(len(aid)):
             if aid[i] == aid[j]:
                 await message.channel.send(f'{aid[i]}={aid[j]}')
 
