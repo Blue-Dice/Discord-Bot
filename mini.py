@@ -31,6 +31,7 @@ async def on_message(message):
             msg = msg[1]
             embeds = msg.embeds
             for embed in embeds:
-                await message.channel.send(f'{embed.to_dict()}')
+                embed_dict = embed.to_dict()
+            await message.channel.send(f'{embed_dict}')
 
 client.run(os.getenv('TOKEN'))
