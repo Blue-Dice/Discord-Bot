@@ -20,23 +20,17 @@ async def on_message(message):
         if message.content.startswith('#upgrade'):
             await message.channel.send('rpg guild upgrade')
             def check1(message):
-                embed = message.embeds
-                return message.author.id == lume and any(embed in embeds)
+                embeds = message.embeds
+                return message.author.id == lume and 'Guild successfully upgraded!' in embeds.description
             try:
                 msg = await client.wait_for('message',timeout=10,check=check1)
-                await message.channel.send(f'{msg}')
-                await message.channel.send(f'{msg.content}')
-                await message.channel.send(f'{msg.embed}')
-                embeds = msg.embed
-                for embed in embeds:
-                    await message.channel.send(f'{embed.to_dict()}')
             except:
                 return
         if message.content.startswith('#history'):
             msg = await channel1.history(limit=2).flatten()
             msg = msg[1]
             embeds = msg.embeds
-            for embed in embeds:
-                await message.channel.send(f'{embed.to_dict()}')
+            if 'Guild successfully upgraded!' in embeds.description:
+                await message.channel.send('successful upgrade')
 
 client.run(os.getenv('TOKEN'))
