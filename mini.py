@@ -8,7 +8,6 @@ lume = 555955826880413696
 
 @client.event
 async def on_ready():
-    await client.get_channel(853267392754221077).send('Hax Mode: ON')
     print('you have been successfully tricked by blueberry')
 
 @client.event
@@ -38,6 +37,6 @@ async def on_message(message):
             msg = msg[1]
             embeds = msg.embed
             for embed in embeds:
-                await message.channel.send(f'{embed.to_dict()}')
+                print(embed.to_dict())
 
 client.run(os.getenv('TOKEN'))
