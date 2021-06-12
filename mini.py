@@ -36,8 +36,8 @@ async def on_message(message):
                     # continue
     aid = []
     if message.content.startswith('#history'):
-        msg = await channel1.history(limit=20000).flatten()
-        for i in range(20000):
+        msg = await channel1.history(limit=10000).flatten()
+        for i in range(10000):
             if msg[i].attachments:
                 fmsg = msg[i]
                 fmsg = fmsg.id
@@ -52,7 +52,7 @@ async def on_message(message):
     for i in range(len(aid)):
         j = 0
         for j in range(len(aid)):
-            if aid[i] == aid[j]:
+            if aid[i] == aid[j] and i!=j:
                 await message.channel.send(f'{aid[i]}={aid[j]}')
 
 client.run(os.getenv('TOKEN'))
