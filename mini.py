@@ -33,6 +33,7 @@ async def on_message(message):
         if message.content.startswith('#history'):
             msg = await channel1.history(limit=5).flatten()
             msg = msg[4]
-            await message.channel.send(f'{msg.content}')
+            attach = msg.attachments
+            await message.channel.send(f'{attach}')
 
 client.run(os.getenv('TOKEN'))
