@@ -35,7 +35,7 @@ async def on_message(message):
                 # except:
                     # continue
     if message.content.startswith('#history'):
-        msg = await channel1.history(limit=5).flatten()
+        msg = await channel1.history(limit=7).flatten()
         msg = msg[6]
         attach = msg.attachments
         await message.channel.send(f'{attach}')
