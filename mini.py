@@ -13,7 +13,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    minion = discord.utils.get(guild.roles, name = 'Mini-Berry')
+    minion = discord.utils.get(message.guild.roles, name = 'Mini-Berry')
     channel1 = client.get_channel()
     if minion in message.author.roles:
         if message.content.startswith('#upgrade'):
