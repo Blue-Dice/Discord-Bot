@@ -18,23 +18,21 @@ async def on_message(message):
         return
     if minion in message.author.roles:
         if message.content.startswith('#upgrade'):
-            await message.channel.send('rpg guild upgrade')
-            def check1(message):
-                embeds = message.embeds
-                return message.author.id == lume and 'Guild successfully upgraded!' in embeds.description
-            try:
-                msg = await client.wait_for('message',timeout=10,check=check1)
-            except:
-                return
+            while(1)
+                await message.channel.send('rpg guild upgrade')
+                def check1(message):
+                    embeds = message.embeds
+                    for embed in embeds:
+                        embed_dict = embed.to_dict()
+                    return message.author.id == lume and embed_dict['description'] == 'Guild successfully upgraded!'
+                try:
+                    await client.wait_for('message',timeout=20,check=check1)
+                    await message.channel.send('Next Upgrade in 2 hours')
+                except:
+                    continue
         if message.content.startswith('#history'):
-            msg = await channel1.history(limit=2).flatten()
-            msg = msg[1]
-            embeds = msg.embeds
-            for embed in embeds:
-                embed_dict = embed.to_dict()
-            if embed_dict['description'] == 'Guild successfully upgraded!':
-                await message.channel.send('Successful Upgrade')
-            else:
-                await message.channel.send('Error')
+            msg = await channel1.history(limit=5).flatten()
+            msg = msg[4]
+            await message.channel.send(f'{msg.content}')
 
 client.run(os.getenv('TOKEN'))
