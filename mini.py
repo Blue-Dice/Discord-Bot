@@ -17,7 +17,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     #minion = discord.utils.get(message.guild.roles, name = 'Mini-Berry')
-    channel1 = client.get_channel(825762233682362438)
+    channel1 = client.get_channel(bluebelly)
     if message.channel != channel1:
         return
     # if minion in message.author.roles:
@@ -34,10 +34,25 @@ async def on_message(message):
                     # await message.channel.send('Next Upgrade in 2 hours')
                 # except:
                     # continue
+    aid = []
     if message.content.startswith('#history'):
-        msg = await channel1.history(limit=7).flatten()
-        msg = msg[6]
-        attach = msg.attachments
-        await message.channel.send(f'{attach}')
+        msg = await channel1.history(limit=20000).flatten()
+        for i in range(20000):
+            if msg[i].attachments:
+                fmsg = msg[i]
+                fmsg = fmsg.id
+                aid.append(fmsg)
+            else:
+                continue
+    i = 0
+    for i in range(aid.len()):
+        await message.channel.send(aid[i])
+    
+    i = 0
+    for i in range(aid.len()):
+        j = 0
+        for j in range(aid.len()):
+            if aid[i] == aid[j]:
+                await message.channel.send(f'{aid[i]}={aid[j]}')
 
 client.run(os.getenv('TOKEN'))
