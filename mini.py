@@ -17,7 +17,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     #minion = discord.utils.get(message.guild.roles, name = 'Mini-Berry')
-    channel1 = client.get_channel(848197327935373323)
+    channel1 = client.get_channel(825762233682362438)
     if message.channel != channel1:
         return
     # if minion in message.author.roles:
