@@ -6,6 +6,8 @@ client = discord.Client()
 
 lume = 555955826880413696
 minichannel = 853267392754221077
+dicechannel = 828941473096794142
+
 @client.event
 async def on_ready():
     print('you have been successfully tricked by blueberry')
@@ -13,7 +15,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     #minion = discord.utils.get(message.guild.roles, name = 'Mini-Berry')
-    channel1 = client.get_channel(828941473096794142)
+    channel1 = client.get_channel(828941629984735252)
     if message.channel != channel1:
         return
     # if minion in message.author.roles:
