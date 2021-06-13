@@ -59,7 +59,7 @@ async def on_message(message):
                         if 'wait at least' in embed_dict1['title']:
                             msg = embed_dict1['title']
                             msg = msg.split('least ',1)[1]
-                            msg = msg.split('...'1)[0]
+                            msg = msg.split('...',1)[0]
                             time_word = msg
                             default_time = await time(msg)
                         await message.channel.send(f'Next Upgrade in {time_word}')
@@ -90,7 +90,7 @@ async def on_message(message):
         if 'wait at least' in embed_dict3['title']:
             msg = embed_dict3['title']
             msg = msg.split('least ',1)[1]
-            msg = msg.split('...'1)[0]
+            msg = msg.split('...',1)[0]
             time_word = msg
             default_time = await time(msg)
         await message.channel.send(f'{time_word} = {default_time}seconds')
