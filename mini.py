@@ -65,7 +65,10 @@ async def on_message(message):
                             for embed in embeds:
                                 global embed_dict1
                                 embed_dict1 = embed.to_dict()
-                            return (embed_dict1['description'] == 'Guild successfully upgraded!' or 'wait at least' in embed_dict1['title'])
+                            if 'description' in embed_dict1:
+                                return embed_dict1['description'] == 'Guild successfully upgraded!'
+                            else:
+                                return 'wait at least' in embed_dict1['title']
                     try:
                         msg = await client.wait_for('message',timeout=10,check=check1)
                         if 'wait at least' in embed_dict1['title']:
@@ -93,11 +96,15 @@ async def on_message(message):
                 for x in range(2):
                     await message.channel.send('rpg guild raid')
                     def check3(message):
-                        embeds = message.embeds
-                        for embed in embeds:
-                            global embed_dict2
-                            embed_dict2 = embed.to_dict()
-                        return message.author.id == lume and ('RAIDED' in embed_dict2['description'] or 'wait at least' in embed_dict2['title'])
+                        if message.author.id == lume:
+                            embeds = message.embeds
+                            for embed in embeds:
+                                global embed_dict2
+                                embed_dict2 = embed.to_dict()
+                            if 'description' in embed_dict2:
+                                return 'RAIDED' in embed_dict2['description']
+                            else:
+                                return 'wait at least' in embed_dict2['title']
                     try:
                         msg = await client.wait_for('message',timeout=10,check=check3)
                         if 'wait at least' in embed_dict2['title']:
