@@ -65,8 +65,7 @@ async def on_message(message):
                             msg = msg.content.split('Time: ',1)[1]
                             time_word = msg
                             default_time = await time(msg)
-                        await message.channel.send(f'Next Raid in {time_word}')
-                        await message.channel.send(f'Next Upgrade in {time_word}')
+                        await message.channel.send(f'Next Upgrade in {time_word} = **{default_time}**')
                         break
                     except asyncio.TimeoutError:
                         continue
@@ -93,7 +92,7 @@ async def on_message(message):
                             msg = msg.content.split('Time: ',1)[1]
                             time_word = msg
                             default_time = await time(msg)
-                        await message.channel.send(f'Next Raid in {time_word}')
+                        await message.channel.send(f'Next Raid in {time_word} = **{default_time}**')
                         break
                     except asyncio.TimeoutError:
                         continue
