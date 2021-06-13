@@ -51,7 +51,7 @@ async def on_message(message):
     if message.channel != channel1:
         return
     if minion in message.author.roles:
-        if message.content.startswith('#upgrade'):
+        if message.content.startswith('$upgrade'):
             while(1):
                 time_word = '2h 0m 0s'
                 for x in range(2):
@@ -80,15 +80,16 @@ async def on_message(message):
                     except asyncio.TimeoutError:
                         continue
                 def check2(message):
-                    return message.content.lower() == '#halt'
+                    return message.content.lower() == '$halt'
                 try:
                     await client.wait_for('message',timeout=default_time,check=check2)
                     await message.channel.send('Upgrade Halted')
+                    break
                 except asyncio.TimeoutError:
                     await message.channel.send(f'{minion.mention} Automatic upgrade in 5 seconds')
                     await asyncio.sleep(5)
                     continue
-        elif message.content.startswith('#raid'):
+        elif message.content.startswith('$raid'):
             while(1):
                 time_word = '2h 0m 0s'
                 for x in range(2):
@@ -97,35 +98,35 @@ async def on_message(message):
                         if message.author.id == lume:
                             embeds = message.embeds
                             for embed in embeds:
-                                global embed_dict2
                                 embed_dict2 = embed.to_dict()
                             if 'description' in embed_dict2:
                                 return 'RAIDED' in embed_dict2['description']
                             if 'title' in embed_dict2:
+                                if 'wait at least' in embed_dict2['title']:
+                                global msg1
+                                msg1 = embed_dict2['title']
+                                msg1 = msg1.split('least ',1)[1]
+                                msg1 = msg1.split('...',1)[0]
+                                time_word = msg1
                                 return 'wait at least' in embed_dict2['title']
                     try:
-                        msg = await client.wait_for('message',timeout=10,check=check3)
-                        if 'title' in embed_dict2:
-                            if 'wait at least' in embed_dict2['title']:
-                                msg = embed_dict2['title']
-                                msg = msg.split('least ',1)[1]
-                                msg = msg.split('...',1)[0]
-                                time_word = msg
-                                default_time = await time(msg)
+                        await client.wait_for('message',timeout=10,check=check3)
+                        default_time = await time(msg1)
                         await message.channel.send(f'Next Raid in {time_word}')
                     except asyncio.TimeoutError:
                         continue
                 def check4(message):
-                    return message.content.lower() == '#halt'
+                    return message.content.lower() == '$halt'
                 try:
                     await client.wait_for('message',timeout=default_time,check=check4)
                     await message.channel.send('Raid Halted')
+                    break
                 except asyncio.TimeoutError:
                     await message.channel.send(f'{minion.mention} Automatic Raid in 5 seconds')
                     await asyncio.sleep(5)
                     continue
-        elif message.content.startswith('#say'):
-            msg = message.content.split('#say ',1)[1]
+        elif message.content.startswith('$say'):
+            msg = message.content.split('$say ',1)[1]
             if any(word in msg.lower() for word in entry):
                 await message.channel.send(f'{msg.lower()}')
             elif message.author.id == 475364248197791764:
@@ -134,13 +135,13 @@ async def on_message(message):
                 await message.channel.send(f'**{message.author.name}**, you can not do that')
     
     if jailer in message.guild.roles:
-        if (message.author.id == lume and 'stop there' in message.content.lower() and client.user.id in message.content) or message.content.startswith('#jail check'):
+        if (message.author.id == lume and 'stop there' in message.content.lower() and client.user.id in message.content) or message.content.startswith('$jail check'):
             for x in range(len(current_protest)):
                 await message.channel.send(f'{current_protest[x]}')
             await jailer.delete()
     
     if message.author.id == lume and ((client.user.name in message.content and 'get in the car' in message.content.lower()) or (str(client.user.id) in message.content and 'you are in the' in message.content.lower())):
-        await message.channel.send('#halt')
+        await message.channel.send('$halt')
         await message.channel.send(f'{minion.mention} Jail Alert')
         await message.channel.send(f'{minion.mention} Jail Alert')
 
