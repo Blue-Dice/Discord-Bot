@@ -1,2 +1,2 @@
-worker: python smoothie.py
-worker: python mini.py
+worker1: python smoothie.py
+worker2: python mini.py
