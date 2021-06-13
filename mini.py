@@ -64,9 +64,9 @@ async def on_message(message):
                             for embed in embeds:
                                 global embed_dict1
                                 embed_dict1 = embed.to_dict()
-                            if 'description' in embed_dict1:
+                            if 'description' in embed_dict1.keys():
                                 return embed_dict1['description'] == 'Guild successfully upgraded!'
-                            if 'title' in embed_dict1:
+                            if 'title' in embed_dict1.keys():
                                 return 'wait at least' in embed_dict1['title']
                     try:
                         msg = await client.wait_for('message',timeout=10,check=check1)
@@ -107,7 +107,7 @@ async def on_message(message):
                             return '#time' in message.content
                     try:
                         msg = await client.wait_for('message',timeout=10,check=check3)
-                        if '#time' in msg.content
+                        if '#time' in msg.content:
                             msg = msg.content.split('#time ',1)[1]
                             default_time = await time(msg)
                         await message.channel.send(f'Next Raid in {time_word}')
@@ -143,17 +143,17 @@ async def on_message(message):
         await message.channel.send(f'{minion.mention} Jail Alert')
         await message.channel.send(f'{minion.mention} Jail Alert')
         
-    if message.author == client.user and (message.content == 'rpg guild upgrade' or message.content == 'rpg guild raid'):
-        msg = await client.wait_for('message',check = lambda message: message.author.id == lume)
-        embeds = msg.embeds
-        for embed in embeds:
-            embed_dict = embed.to_dict()
-        if 'title' in embed_dict:
-            if 'wait at least' in embed_dict['title']:
-                msg = embed_dict['title']
-                msg = msg.split('least ',1)[1]
-                msg = msg.split('...',1)[0]
-                time_word = msg
-                await message.channel.send(f'#time {msg}')
+    # if message.author == client.user and (message.content == 'rpg guild upgrade' or message.content == 'rpg guild raid'):
+        # msg = await client.wait_for('message',check = lambda message: message.author.id == lume)
+        # embeds = msg.embeds
+        # for embed in embeds:
+            # embed_dict = embed.to_dict()
+        # if 'title' in embed_dict:
+            # if 'wait at least' in embed_dict['title']:
+                # msg = embed_dict['title']
+                # msg = msg.split('least ',1)[1]
+                # msg = msg.split('...',1)[0]
+                # time_word = msg
+                # await message.channel.send(f'#time {msg}')
 
 client.run(os.getenv('TOKEN'))
