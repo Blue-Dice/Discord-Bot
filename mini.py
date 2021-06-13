@@ -101,7 +101,7 @@ async def on_message(message):
                             embeds = message.embeds
                             for embed in embeds:
                                 embed_dict2 = embed.to_dict()
-                            if 'description' in embed_dict2:
+                            if 'description' in embed_dict2.keys():
                                 return 'RAIDED' in embed_dict2['description']
                         if message.author == client.user:
                             return '#time' in message.content
@@ -143,17 +143,17 @@ async def on_message(message):
         await message.channel.send(f'{minion.mention} Jail Alert')
         await message.channel.send(f'{minion.mention} Jail Alert')
         
-    # if message.author == client.user and (message.content == 'rpg guild upgrade' or message.content == 'rpg guild raid'):
-        # msg = await client.wait_for('message',check = lambda message: message.author.id == lume)
-        # embeds = msg.embeds
-        # for embed in embeds:
-            # embed_dict = embed.to_dict()
-        # if 'title' in embed_dict:
-            # if 'wait at least' in embed_dict['title']:
-                # msg = embed_dict['title']
-                # msg = msg.split('least ',1)[1]
-                # msg = msg.split('...',1)[0]
-                # time_word = msg
-                # await message.channel.send(f'#time {msg}')
+    if message.author == client.user and (message.content == 'rpg guild upgrade' or message.content == 'rpg guild raid'):
+        msg = await client.wait_for('message',check = lambda message: message.author.id == lume)
+        embeds = msg.embeds
+        for embed in embeds:
+            embed_dict = embed.to_dict()
+        if 'title' in embed_dict.keys():
+            if 'wait at least' in embed_dict['title']:
+                msg = embed_dict['title']
+                msg = msg.split('least ',1)[1]
+                msg = msg.split('...',1)[0]
+                time_word = msg
+                await message.channel.send(f'#time {msg}')
 
 client.run(os.getenv('TOKEN'))
