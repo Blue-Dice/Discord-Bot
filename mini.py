@@ -41,6 +41,7 @@ async def on_message(message):
         embeds = msg.embeds
         for embed in embeds:
             embed_ict = embed.to_dict()
-        await message.channel.send(f'{embed_ict}')
+        if 'RAIDED' in embed_ict['description']:
+            await message.channel.send(f"{embed_ict['description']}")
 
 client.run(os.getenv('TOKEN'))
