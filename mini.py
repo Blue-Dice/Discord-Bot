@@ -46,7 +46,7 @@ async def time(msg):
 async def on_message(message):
     minion = discord.utils.get(message.guild.roles, name = 'Mini-Berry')
     myid = int(client.user.id)
-    me = client.get_member(myid)
+    me = client.get_user(myid)
     channel1 = client.get_channel(minichannel)
     default_time = 2
     if message.channel != channel1:
