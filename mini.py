@@ -6,20 +6,15 @@ client = discord.Client()
 
 lume = 555955826880413696
 minichannel = 853267392754221077
-bluebelly = 828941473096794142
-dicechannel = 828941629984735252
-rpgstuff = 848197327935373323
+miniberryrole = 853270231720132629
 
 entry = ['yes','rpg guild', 'no', 'y', 'n', 'rpg guild list', 'a', 'b', 'c', 'rpg jail', 'protest', 'fish', 'normie fish', 'golden fish', 'epic fish', 'life potion', 'epic coin', 'coin', 'apple', 'banana', 'ruby', 'wolf', 'wolf skin', 'zombie eye', 'unicorn horn', 'mermaid hair', 'chip', 'dragon scale']
 
 protester = ['normie fish', 'golden fish', 'epic fish', 'life potion', 'epic coin', 'coin', 'apple', 'banana', 'ruby', 'wolf skin', 'zombie eye', 'unicorn horn', 'mermaid hair', 'chip', 'dragon scale']
 
-current_protest = ['normie fish', 'golden fish', 'epic fish', 'life potion', 'epic coin', 'coin', 'apple', 'banana', 'ruby', 'wolf skin', 'zombie eye']
-
-temptime = ['h','m','s']
-
 @client.event
 async def on_ready():
+    await client.get_channel(minichannel).send(f'<@&{miniberryrole}> Restart Alert')
     print('you have been successfully tricked by blueberry')
     
 async def time(msg):
@@ -65,7 +60,7 @@ async def on_message(message):
                             msg = msg.content.split('Time: ',1)[1]
                             time_word = msg
                             default_time = await time(msg)
-                        await message.channel.send(f'Next Upgrade in {time_word} = **{default_time}**')
+                        await message.channel.send(f'Next Upgrade in {time_word} = **{default_time}** seconds')
                         break
                     except asyncio.TimeoutError:
                         continue
@@ -92,7 +87,7 @@ async def on_message(message):
                             msg = msg.content.split('Time: ',1)[1]
                             time_word = msg
                             default_time = await time(msg)
-                        await message.channel.send(f'Next Raid in {time_word} = **{default_time}**')
+                        await message.channel.send(f'Next Raid in {time_word} = **{default_time}** seconds')
                         break
                     except asyncio.TimeoutError:
                         continue
@@ -117,8 +112,17 @@ async def on_message(message):
     
     if jailer in message.guild.roles:
         if (message.author.id == lume and 'stop there' in message.content.lower() and client.user.id in message.content) or message.content.startswith('$jail check'):
-            for x in range(len(current_protest)):
-                await message.channel.send(f'{current_protest[x]}')
+            await channel1.send('normie fish')
+            await channel1.send('golden fish')
+            await channel1.send('epic fish')
+            await channel1.send('life potion')
+            await channel1.send('epic coin')
+            await channel1.send('coin')
+            await channel1.send('apple')
+            await channel1.send('banana')
+            await channel1.send('ruby')
+            await channel1.send('wolf skin')
+            await channel1.send('zombie eye')
             await jailer.delete()
     
     if message.author.id == lume and ((client.user.name in message.content and 'get in the car' in message.content.lower()) or (str(client.user.id) in message.content and 'you are in the' in message.content.lower())):
