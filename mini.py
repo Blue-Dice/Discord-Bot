@@ -124,11 +124,11 @@ async def on_message(message):
             else:
                 await message.channel.send(f'{message.author.name}, you can not do that')
     
-    if minion in me.roles:
+    if minion in message.author.roles:
         if (message.author.id == lume and 'stop there' in message.content.lower() and client.user.id in message.content) or message.content.startswith('#jail check'):
             for x in range(len(current_protest)):
                 await message.channel.send(f'{current_protest[x]}')
-            client.remove_roles(me,minion)
+            client.remove_roles(message.author,minion)
     if message.author.id == lume and ((client.user.name in message.content and 'get in the car' in message.content.lower()) or (client.user.id in message.content and 'you are in the' in message.content.lower())):
         await message.channel.send('#halt')
         await message.channel.send(f'{minion.mention} Jail Alert')
