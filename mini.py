@@ -45,10 +45,7 @@ async def time(msg):
 @client.event
 async def on_message(message):
     minion = discord.utils.get(message.guild.roles, name = 'Mini-Berry')
-    try:
-        jailer = discord.utils.get(message.guild.roles, name = 'jail-check')
-    except:
-        return
+    jailer = discord.utils.get(message.guild.roles, name = 'jail-check')
     channel1 = client.get_channel(minichannel)
     default_time = 2
     if message.channel != channel1:
@@ -67,7 +64,7 @@ async def on_message(message):
                                 embed_dict1 = embed.to_dict()
                             if 'description' in embed_dict1:
                                 return embed_dict1['description'] == 'Guild successfully upgraded!'
-                            else:
+                            if 'title' in embed_dict1:
                                 return 'wait at least' in embed_dict1['title']
                     try:
                         msg = await client.wait_for('message',timeout=10,check=check1)
@@ -103,7 +100,7 @@ async def on_message(message):
                                 embed_dict2 = embed.to_dict()
                             if 'description' in embed_dict2:
                                 return 'RAIDED' in embed_dict2['description']
-                            else:
+                            if 'title' in embed_dict2:
                                 return 'wait at least' in embed_dict2['title']
                     try:
                         msg = await client.wait_for('message',timeout=10,check=check3)
@@ -134,14 +131,11 @@ async def on_message(message):
             else:
                 await message.channel.send(f'**{message.author.name}**, you can not do that')
     
-    try:
-        if jailer in guild.roles:
-            if (message.author.id == lume and 'stop there' in message.content.lower() and client.user.id in message.content) or message.content.startswith('#jail check'):
-                for x in range(len(current_protest)):
-                    await message.channel.send(f'{current_protest[x]}')
-                await jailer.delete()
-    except:
-        return
+    if jailer in guild.roles:
+        if (message.author.id == lume and 'stop there' in message.content.lower() and client.user.id in message.content) or message.content.startswith('#jail check'):
+            for x in range(len(current_protest)):
+                await message.channel.send(f'{current_protest[x]}')
+            await jailer.delete()
     
     if message.author.id == lume and ((client.user.name in message.content and 'get in the car' in message.content.lower()) or (str(client.user.id) in message.content and 'you are in the' in message.content.lower())):
         await message.channel.send('#halt')
