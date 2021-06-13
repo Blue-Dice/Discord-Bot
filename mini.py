@@ -55,7 +55,7 @@ async def on_message(message):
                     def check1(message):
                         return message.author == client.user and 'Time:' in message.content
                     try:
-                        msg = await client.wait_for('message',timeout=10,check=check1)
+                        msg = await client.wait_for('message',timeout=20,check=check1)
                         if 'Time' in msg.content:
                             msg = msg.content.split('Time: ',1)[1]
                             time_word = msg
@@ -82,7 +82,7 @@ async def on_message(message):
                     def check3(message):
                         return message.author == client.user and 'Time:' in message.content
                     try:
-                        msg = await client.wait_for('message',timeout=10,check=check3)
+                        msg = await client.wait_for('message',timeout=20,check=check3)
                         if 'Time' in msg.content:
                             msg = msg.content.split('Time: ',1)[1]
                             time_word = msg
