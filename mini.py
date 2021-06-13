@@ -86,9 +86,9 @@ async def on_message(message):
         msg = msg[2]
         embeds = msg.embeds
         for embed in embeds:
-            embed_ict = embed.to_dict()
-        if 'wait at least' in embed_dict1['title']:
-            msg = embed_dict1['title']
+            embed_dict3 = embed.to_dict()
+        if 'wait at least' in embed_dict3['title']:
+            msg = embed_dict3['title']
             msg = msg.split('least ',1)[1]
             msg = msg.split('...'1)[0]
             time_word = msg
