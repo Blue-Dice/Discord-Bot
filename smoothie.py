@@ -280,4 +280,4 @@ async def on_message(message):
         await message.channel.send('#stop adv')
         await message.channel.send('#stop ed')
         
-client.run(os.getenv('TOKEN'))
+client.run(os.getenv('KEY'))
