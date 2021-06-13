@@ -16,6 +16,8 @@ protester = ['normie fish', 'golden fish', 'epic fish', 'life potion', 'epic coi
 
 current_protest = ['normie fish', 'golden fish', 'epic fish', 'life potion', 'epic coin', 'coin', 'apple', 'banana', 'ruby', 'wolf skin', 'zombie eye']
 
+temptime = ['h','m','s']
+
 @client.event
 async def on_ready():
     print('you have been successfully tricked by blueberry')
@@ -101,17 +103,13 @@ async def on_message(message):
                                 embed_dict2 = embed.to_dict()
                             if 'description' in embed_dict2:
                                 return 'RAIDED' in embed_dict2['description']
-                            if 'title' in embed_dict2:
-                                if 'wait at least' in embed_dict2['title']:
-                                    global msg1
-                                    msg1 = embed_dict2['title']
-                                    msg1 = msg1.split('least ',1)[1]
-                                    msg1 = msg1.split('...',1)[0]
-                                    time_word = msg1
-                                    return 'wait at least' in embed_dict2['title']
+                        if message.author == client.user:
+                            return '#time' in message.content
                     try:
-                        await client.wait_for('message',timeout=10,check=check3)
-                        default_time = await time(msg1)
+                        msg = await client.wait_for('message',timeout=10,check=check3)
+                        if '#time' in msg.content
+                            msg = msg.content.split('#time ',1)[1]
+                            default_time = await time(msg)
                         await message.channel.send(f'Next Raid in {time_word}')
                     except asyncio.TimeoutError:
                         continue
@@ -144,5 +142,18 @@ async def on_message(message):
         await message.channel.send('$halt')
         await message.channel.send(f'{minion.mention} Jail Alert')
         await message.channel.send(f'{minion.mention} Jail Alert')
+        
+    if message.author == client.user and (message.content == 'rpg guild upgrade' or message.content == 'rpg guild raid'):
+        msg = await client.wait_for('message',check = lambda message: message.author.id == lume)
+        embeds = msg.embeds
+        for embed in embeds:
+            embed_dict = embed.to_dict()
+        if 'title' in embed_dict:
+            if 'wait at least' in embed_dict['title']:
+                msg = embed_dict['title']
+                msg = msg.split('least ',1)[1]
+                msg = msg.split('...',1)[0]
+                time_word = msg
+                await message.channel.send(f'#time {msg}')
 
 client.run(os.getenv('TOKEN'))
