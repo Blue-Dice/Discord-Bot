@@ -45,7 +45,7 @@ async def on_message(message):
         return
     if minion in message.author.roles:
         if message.content.startswith('#upgrade'):
-            while(1)
+            while(1):
                 for x in range(3):
                     await message.channel.send('rpg guild upgrade')
                     def check1(message):
