@@ -16,43 +16,31 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    #minion = discord.utils.get(message.guild.roles, name = 'Mini-Berry')
-    channel1 = client.get_channel(bluebelly)
+    minion = discord.utils.get(message.guild.roles, name = 'Mini-Berry')
+    channel1 = client.get_channel(minichannel)
     if message.channel != channel1:
         return
-    # if minion in message.author.roles:
-        # if message.content.startswith('#upgrade'):
-            # while(1):
-                # await message.channel.send('rpg guild upgrade')
-                # def check1(message):
-                    # embeds = message.embeds
-                    # for embed in embeds:
-                        # embed_dict = embed.to_dict()
-                    # return message.author.id == lume and embed_dict['description'] == 'Guild successfully upgraded!'
-                # try:
-                    # await client.wait_for('message',timeout=20,check=check1)
-                    # await message.channel.send('Next Upgrade in 2 hours')
-                # except:
-                    # continue
+    if minion in message.author.roles:
+        if message.content.startswith('#upgrade'):
+            while(1):
+                await message.channel.send('rpg guild upgrade')
+                def check1(message):
+                    embeds = message.embeds
+                    for embed in embeds:
+                        embed_dict = embed.to_dict()
+                    return message.author.id == lume and embed_dict['description'] == 'Guild successfully upgraded!'
+                try:
+                    await client.wait_for('message',timeout=20,check=check1)
+                    await message.channel.send('Next Upgrade in 2 hours')
+                except:
+                    continue
     aid = []
     if message.content.startswith('#history'):
-        msg = await channel1.history(limit=10000).flatten()
-        for i in range(10000):
-            if msg[i].attachments:
-                fmsg = msg[i]
-                fmsg = fmsg.id
-                aid.append(fmsg)
-            else:
-                continue
-    i = 0
-    for i in range(len(aid)):
-        await message.channel.send(aid[i])
-    
-    i = 0
-    for i in range(len(aid)):
-        j = 0
-        for j in range(len(aid)):
-            if aid[i] == aid[j] and i!=j:
-                await message.channel.send(f'{aid[i]}={aid[j]}')
+        msg = await channel1.history(limit=3).flatten()
+        msg = msg[2]
+        embeds = msg.embeds
+        for embed in embeds:
+            embed_ict = embed.to_dict()
+        await message.channel.send(f'{embed_ict}')
 
 client.run(os.getenv('TOKEN'))
