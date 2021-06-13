@@ -45,8 +45,10 @@ async def time(msg):
 @client.event
 async def on_message(message):
     minion = discord.utils.get(message.guild.roles, name = 'Mini-Berry')
-    myid = int(client.user.id)
-    me = client.get_user(myid)
+    try:
+        jailer = discord.utils.get(message.guild.roles, name = 'jail-check')
+    except:
+        return
     channel1 = client.get_channel(minichannel)
     default_time = 2
     if message.channel != channel1:
@@ -58,11 +60,12 @@ async def on_message(message):
                 for x in range(2):
                     await message.channel.send('rpg guild upgrade')
                     def check1(message):
-                        embeds = message.embeds
-                        for embed in embeds:
-                            global embed_dict1
-                            embed_dict1 = embed.to_dict()
-                        return message.author.id == lume and (embed_dict1['description'] == 'Guild successfully upgraded!' or 'wait at least' in embed_dict1['title'])
+                        if message.author.id == lume:
+                            embeds = message.embeds
+                            for embed in embeds:
+                                global embed_dict1
+                                embed_dict1 = embed.to_dict()
+                            return (embed_dict1['description'] == 'Guild successfully upgraded!' or 'wait at least' in embed_dict1['title'])
                     try:
                         msg = await client.wait_for('message',timeout=10,check=check1)
                         if 'wait at least' in embed_dict1['title']:
@@ -94,7 +97,7 @@ async def on_message(message):
                         for embed in embeds:
                             global embed_dict2
                             embed_dict2 = embed.to_dict()
-                        return message.author.id == lume and ('RAIDED' in embed_dict2['description'] or 'wait at least' in embed_dict1['title'])
+                        return message.author.id == lume and ('RAIDED' in embed_dict2['description'] or 'wait at least' in embed_dict2['title'])
                     try:
                         msg = await client.wait_for('message',timeout=10,check=check3)
                         if 'wait at least' in embed_dict2['title']:
@@ -122,18 +125,20 @@ async def on_message(message):
             elif message.author.id == 475364248197791764:
                 await message.channel.send(f'{msg.lower()}')
             else:
-                await message.channel.send(f'{message.author.name}, you can not do that')
+                await message.channel.send(f'**{message.author.name}**, you can not do that')
     
-    if minion in message.author.roles:
-        if (message.author.id == lume and 'stop there' in message.content.lower() and client.user.id in message.content) or message.content.startswith('#jail check'):
-            for x in range(len(current_protest)):
-                await message.channel.send(f'{current_protest[x]}')
-            client.remove_roles(message.author,minion)
-    if message.author.id == lume and ((client.user.name in message.content and 'get in the car' in message.content.lower()) or (client.user.id in message.content and 'you are in the' in message.content.lower())):
+    try:
+        if jailer in guild.roles:
+            if (message.author.id == lume and 'stop there' in message.content.lower() and client.user.id in message.content) or message.content.startswith('#jail check'):
+                for x in range(len(current_protest)):
+                    await message.channel.send(f'{current_protest[x]}')
+                await jailer.delete()
+    except:
+        return
+    
+    if message.author.id == lume and ((client.user.name in message.content and 'get in the car' in message.content.lower()) or (str(client.user.id) in message.content and 'you are in the' in message.content.lower())):
         await message.channel.send('#halt')
         await message.channel.send(f'{minion.mention} Jail Alert')
         await message.channel.send(f'{minion.mention} Jail Alert')
-    if message.content.startswith('#mention'):
-        await message.channel.send(f'{minion.mention}')
 
 client.run(os.getenv('TOKEN'))
