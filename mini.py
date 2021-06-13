@@ -58,24 +58,14 @@ async def on_message(message):
                 for x in range(2):
                     await message.channel.send('rpg guild upgrade')
                     def check1(message):
-                        if message.author.id == lume:
-                            embeds = message.embeds
-                            for embed in embeds:
-                                global embed_dict1
-                                embed_dict1 = embed.to_dict()
-                            if 'description' in embed_dict1.keys():
-                                return embed_dict1['description'] == 'Guild successfully upgraded!'
-                            if 'title' in embed_dict1.keys():
-                                return 'wait at least' in embed_dict1['title']
+                        return message.author == client.user and 'Time:' in message.content
                     try:
                         msg = await client.wait_for('message',timeout=10,check=check1)
-                        if 'title' in embed_dict1:
-                            if 'wait at least' in embed_dict1['title']:
-                                msg = embed_dict1['title']
-                                msg = msg.split('least ',1)[1]
-                                msg = msg.split('...',1)[0]
-                                time_word = msg
-                                default_time = await time(msg)
+                        if 'Time' in msg.content:
+                            msg = msg.content.split('Time: ',1)[1]
+                            time_word = msg
+                            default_time = await time(msg)
+                        await message.channel.send(f'Next Raid in {time_word}')
                         await message.channel.send(f'Next Upgrade in {time_word}')
                         break
                     except asyncio.TimeoutError:
@@ -136,6 +126,22 @@ async def on_message(message):
         await message.channel.send('$halt')
         await message.channel.send(f'{minion.mention} Jail Alert')
         await message.channel.send(f'{minion.mention} Jail Alert')
+    
+    if message.author == client.user and (message.content == 'rpg guild upgrade'):
+        msg = await client.wait_for('message',check = lambda message: message.author.id == lume)
+        embeds = msg.embeds
+        for embed in embeds:
+            embed_dict1 = embed.to_dict()
+        if 'title' in embed_dict1.keys():
+            if 'wait at least' in embed_dict1['title']:
+                msg = embed_dict1['title']
+                msg = msg.split('least ',1)[1]
+                msg = msg.split('...',1)[0]
+                time_word = msg
+                await message.channel.send(f'Time: {msg}')
+        elif 'description' in embed_dict1.keys():
+            if embed_dict1['description'] == 'Guild successfully upgraded!':
+                await message.channel.send(f'Time: **2h 0m 0s**')
         
     if message.author == client.user and (message.content == 'rpg guild raid'):
         msg = await client.wait_for('message',check = lambda message: message.author.id == lume)
@@ -150,7 +156,7 @@ async def on_message(message):
                 time_word = msg
                 await message.channel.send(f'Time: {msg}')
         elif 'description' in embed_dict2.keys():
-            if 'RAIDED' embed_dict2['description']:
+            if 'RAIDED' in embed_dict2['description']:
                 await message.channel.send(f'Time: **2h 0m 0s**')
 
 client.run(os.getenv('TOKEN'))
