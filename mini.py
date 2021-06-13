@@ -27,21 +27,34 @@ async def on_message(message):
                 def check1(message):
                     embeds = message.embeds
                     for embed in embeds:
-                        embed_dict = embed.to_dict()
-                    return message.author.id == lume and embed_dict['description'] == 'Guild successfully upgraded!'
+                        embed_dict1 = embed.to_dict()
+                    return message.author.id == lume and embed_dict1['description'] == 'Guild successfully upgraded!'
                 try:
                     await client.wait_for('message',timeout=20,check=check1)
                     await message.channel.send('Next Upgrade in 2 hours')
                 except:
                     continue
-    aid = []
+        
+        if message.content.startswith('#raid'):
+            while(1):
+                await message.channel.send('rpg guild raid')
+                def check1(message):
+                    embeds = message.embeds
+                    for embed in embeds:
+                        embed_dict2 = embed.to_dict()
+                    return message.author.id == lume and 'RAIDED' in embed_dict2['description']
+                try:
+                    await client.wait_for('message',timeout=20,check=check1)
+                    await message.channel.send('Next Raid in 2 hours')
+                except:
+                    continue
+    
     if message.content.startswith('#history'):
         msg = await channel1.history(limit=3).flatten()
         msg = msg[2]
         embeds = msg.embeds
         for embed in embeds:
             embed_ict = embed.to_dict()
-        if 'RAIDED' in embed_ict['description']:
-            await message.channel.send(f"{embed_ict['description']}")
+        await message.channel.send(f"{embed_ict}")
 
 client.run(os.getenv('TOKEN'))
