@@ -103,12 +103,12 @@ async def on_message(message):
                                 return 'RAIDED' in embed_dict2['description']
                             if 'title' in embed_dict2:
                                 if 'wait at least' in embed_dict2['title']:
-                                global msg1
-                                msg1 = embed_dict2['title']
-                                msg1 = msg1.split('least ',1)[1]
-                                msg1 = msg1.split('...',1)[0]
-                                time_word = msg1
-                                return 'wait at least' in embed_dict2['title']
+                                    global msg1
+                                    msg1 = embed_dict2['title']
+                                    msg1 = msg1.split('least ',1)[1]
+                                    msg1 = msg1.split('...',1)[0]
+                                    time_word = msg1
+                                    return 'wait at least' in embed_dict2['title']
                     try:
                         await client.wait_for('message',timeout=10,check=check3)
                         default_time = await time(msg1)
