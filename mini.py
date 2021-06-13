@@ -50,7 +50,7 @@ async def on_message(message):
     if message.channel != channel1:
         return
     if minion in message.author.roles:
-        if message.content.startswith('#upgrade').lower():
+        if message.content.startswith('#upgrade'):
             while(1):
                 time_word = '2h 0m 0s'
                 for x in range(2):
@@ -82,7 +82,7 @@ async def on_message(message):
                     await message.channel.send(f'{minion.mention} Automatic upgrade in 5 seconds')
                     await asyncio.sleep(5)
                     continue
-        elif message.content.startswith('#raid').lower:
+        elif message.content.startswith('#raid'):
             while(1):
                 time_word = '2h 0m 0s'
                 for x in range(2):
@@ -113,7 +113,7 @@ async def on_message(message):
                     await message.channel.send(f'{minion.mention} Automatic Raid in 5 seconds')
                     await asyncio.sleep(5)
                     continue
-        elif message.content.startswith('#say').lower():
+        elif message.content.startswith('#say'):
             msg = message.content.split('#say ',1)[1]
             if any(word in msg.lower() for word in entry):
                 await message.channel.send(f'{msg.lower()}')
@@ -131,5 +131,7 @@ async def on_message(message):
         await message.channel.send('#halt')
         await message.channel.send(f'{minion.mention} Jail Alert')
         await message.channel.send(f'{minion.mention} Jail Alert')
+    if message.content.startswith('#mention'):
+        await message.channel.send(f'{minion.mention}')
 
 client.run(os.getenv('TOKEN'))
