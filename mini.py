@@ -53,7 +53,7 @@ async def on_message(message):
                         for embed in embeds:
                             global embed_dict1
                             embed_dict1 = embed.to_dict()
-                        return message.author.id == lume and (embed_dict1['description'] == 'Guild successfully upgraded!' or 'wait at least' in embed_dict1['title']
+                        return message.author.id == lume and (embed_dict1['description'] == 'Guild successfully upgraded!' or 'wait at least' in embed_dict1['title'])
                     try:
                         msg = await client.wait_for('message',timeout=20,check=check1)
                         if 'wait at least' in embed_dict1['title']:
